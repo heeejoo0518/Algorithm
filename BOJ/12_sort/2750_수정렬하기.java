@@ -15,6 +15,7 @@ public class Main {
 		
 		in.close();
 		
+		//quick-sort
 		Arrays.sort(num);
 		
 		for(int i:num) {

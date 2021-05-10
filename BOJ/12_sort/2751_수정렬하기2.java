@@ -16,6 +16,7 @@ public class Main {
 		
 		in.close();
 		
+		//merge-sort
 		Collections.sort(num);
 		
 		StringBuilder sb = new StringBuilder();

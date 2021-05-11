@@ -53,3 +53,15 @@ public class Main{
 		return Math.min(b_cnt,w_cnt);
 	}
 }
+
+
+//반례
+//8 8
+//BBBBWBBW
+//WWWWBBWB
+//WWBBWBWW
+//WBWWBWBW
+//WBBWBBWB
+//BWBWBWWB
+//BWWWWWBW
+//BWBBBBWW

@@ -10,7 +10,7 @@ public class Main{
 		int n = Integer.parseInt(br.readLine());		
 		
 		int[] nums = new int[n];
-		int[] sort = new int[10000000];
+		int[] sort = new int[10000001];
 		int max = 0;
 		
 		for(int i=0;i<n;i++) {

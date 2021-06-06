@@ -2,25 +2,26 @@ import java.io.*;
 import java.util.*;
 
 public class Main{
-	static int[] sequence;
-	static int[] LIS;
+	static int[] dp;
+	static int[] A;
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));		
 		int n = Integer.parseInt(br.readLine());
 		
-		sequence = new int[n+1];
-		LIS = new int[n+1];
+		A = new int[n+1];
+		dp = new int[n+1];
 		
 		StringTokenizer st = new StringTokenizer(br.readLine()," ");
 		for(int i=1;st.hasMoreTokens();i++) {
-			sequence[i] = Integer.parseInt(st.nextToken());
+			A[i] = Integer.parseInt(st.nextToken());
 		}
-		br.close();
 		
+		br.close();
+
 		int max = subsequence(n);
 
-		for(int i=1;i<n;i++) {
-			if(max<LIS[i]) max = LIS[i];
+		for(int i=1;i<=n;i++) {
+			if(max<dp[i]) max = dp[i];
 		}
 		
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -29,26 +30,23 @@ public class Main{
 		bw.flush();
 		bw.close();
 	}
-	
 	public static int subsequence(int n) {
-		if(n<1) return LIS[0];
-		if(LIS[n]!=0) return LIS[n];
-
+		if(n<1) return 0;
+		if(dp[n]!=0) return dp[n];
+		
+		int len = dp.length;
+		
+		if(n==1) return dp[len-1] = 1;
+		
 		subsequence(n-1);
 		
-		LIS[n] = 1;
-		
-		for(int i=1;i<n;i++) {
-			int length = LIS[i];
-			
-			//값이 나보다 작고 길이가 나보다 길거나 같으면
-			if(sequence[i]<sequence[n] && length>=LIS[n]) {
-				LIS[n] = length+1;
+		dp[len-n] = 1;
+		for(int i=len-n+1;i<dp.length;i++) {
+			if(dp[len-n]<=dp[i] && A[len-n]>A[i]) {
+				dp[len-n] = dp[i]+1;
 			}
 		}
-		
-		return LIS[n];
+
+		return dp[len-n];
 	}
-
-
 }

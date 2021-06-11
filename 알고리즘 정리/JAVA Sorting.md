@@ -8,8 +8,9 @@
 
 ```java
 Arrays.sort(data);
-Arrays.sort(data,startIdx,size);
+Arrays.sort(data, fromIdx, toIdx);
 Arrays.sort(data, comparator);
+Arrays.sort(data, startIdx, toIdx, comparator);
 ```
 
 
@@ -21,6 +22,43 @@ Arrays.sort(data, comparator);
 ```java
 Collections.sort(data);
 Collections.sort(data, comparator);
+```
+
+
+
+## Arrays.binarySearch()
+
+* 목록 호출 전 오름차순 정렬된 data 필수
+* 동일한 요소가 여러 개 있을 경우 어떤 요소가 발견될 지 보장되지 않음
+* return
+  * 키가 있을 경우 **인덱스** > 0
+  * 키가 없을 경우 **-삽입할 지점-1** < 0
+  * 첫번째 요소가 키보다 큰 경우 **-1** < 0
+  * 목록의 모든 요소가 지정된 키보다 작을 경우 **-list.size()** < 0
+
+```java
+Arrays.binarySearch(data, key);
+Arrays.binarySearch(data, fromIdx, toIdx, key);
+Arrays.binarySearch(data, key, comparator);
+Arrays.binarySearch(data, fromIdx, toIdx, key, comparator);
+```
+
+
+
+## Collections.binarySearch()
+
+* 목록 호출 전 오름차순 정렬된 data 필수
+* 동일한 요소가 여러 개 있을 경우 어떤 요소가 발견될 지 보장되지 않음
+* 랜덤 엑세스일 때: O(log n), 데이터 크고 랜덤액세스 사용 안할 때: O(n) + O(log n) (링크횡단+비교시간)
+* return
+  * 키가 있을 경우 **인덱스** > 0
+  * 키가 없을 경우 **-삽입할 지점-1** < 0
+  * 첫번째 요소가 키보다 큰 경우 **-1** < 0
+  * 목록의 모든 요소가 지정된 키보다 작을 경우 **-list.size()** < 0
+
+```java
+Collections.binarySearch(data, key);
+Collections.binarySearch(data, key, comparator);
 ```
 
 

@@ -33,7 +33,8 @@ public class Main{
 				
 //				sb.append(top+1+"\n");
 			}else if(command.equals("empty")){
-				sb.append(st.empty()+"\n");
+				if(st.empty()) sb.append("1\n");
+				else sb.append("0\n");
 				
 //				if(top==-1) sb.append("1\n");
 //				else sb.append("0\n");

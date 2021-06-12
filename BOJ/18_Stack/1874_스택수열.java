@@ -13,20 +13,17 @@ public class Main{
 		
 		br.close();
 		
-		int[] sorted = Arrays.stream(sequence).sorted().toArray();
-		
-		StringBuilder sb = new StringBuilder();
-		
+		StringBuilder sb = new StringBuilder();		
 		Stack<Integer> stack = new Stack<>();
 		int idx=0;
 		
-		for(int i=0;i<n;i++) {
-			stack.push(sorted[i]);
+		for(int i=1;i<=n;i++) {
+			stack.push(i);
 			sb.append("+\n");
 			while(!stack.empty() && stack.peek()==sequence[idx]) {
 				stack.pop();
-				idx++;
 				sb.append("-\n");
+				idx++;
 			}
 		}
 		

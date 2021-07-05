@@ -2,45 +2,31 @@ import java.io.*;
 import java.util.*;
 
 public class Main{
-	static List<Integer> subsequence;
+	static List<Integer> sequence;
 	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		
 		int n = Integer.parseInt(br.readLine());
-
-		subsequence = new ArrayList<>();
-		subsequence.add(0);
+		sequence = new ArrayList<>();
 		
 		StringTokenizer st = new StringTokenizer(br.readLine()," ");
+		
 		for(int i=0;i<n;i++) {
-			int value = Integer.parseInt(st.nextToken());
-			if(subsequence.get(subsequence.size()-1) < value) {
-				subsequence.add(value);
-				continue;
+			int num = Integer.parseInt(st.nextToken());
+			
+			if(sequence.size()==0 || num>sequence.get(sequence.size()-1)) sequence.add(num);
+			else {
+				int idx = Collections.binarySearch(sequence, num);
+				if(idx<0) sequence.set(-idx-1, num);
 			}
-			
-			//search
-//			int left = 1;
-//			int right = subsequence.size()-1;
-//			while(left<right) {
-//				int mid = (left+right)/2;
-//				if(subsequence.get(mid)<value) {
-//					left = mid+1;
-//				}else {
-//					right = mid;
-//				}
-//			}
-//			int idx = right;
-			
-			int idx = Collections.binarySearch(subsequence, value);
-			idx = idx>0? idx:-idx-1;
-			subsequence.set(idx, value);
-			
 		}
 		
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		bw.write(String.valueOf(subsequence.size()-1));
+		br.close();
 		
+		bw.write(String.valueOf(sequence.size()));
 		bw.flush();
 		bw.close();
 	}
+
 }

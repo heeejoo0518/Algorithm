@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.PriorityQueue;
 
 public class Main{
 	static int[] heap;
@@ -9,6 +10,9 @@ public class Main{
 		StringBuilder sb = new StringBuilder();
 		
 		int n = Integer.parseInt(br.readLine());
+		
+		//우선순위 큐 자료구조 활용 가능
+		//PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(Collections.reverseOrder());
 		
 		heap = new int[Math.min(n, 100)+1];
 		for(int i=0;i<n;i++) {

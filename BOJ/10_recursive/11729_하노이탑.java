@@ -1,41 +1,36 @@
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 
-public class Main{
+public class BOJ_11729_하노이탑이동순서 {
 	static StringBuilder sb = new StringBuilder();
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+	public static void main(String[] args) throws Exception {
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		int N = Integer.parseInt(in.readLine());
 		
-		int n = Integer.parseInt(br.readLine());		
-		br.close();
+		in.close();
 		
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		
-		bw.write(hanoi(n,1,2,3)+"\n");
-		bw.write(sb.toString());		
-		
-		bw.flush();
-		bw.close();
+		sb.insert(0, moveTower(1, 2, 3, N) + "\n"); // 맨 앞에 끼워넣기
+		System.out.print(sb.toString());
 	}
-	
-	public static int hanoi(int n, int a, int b, int c) {
-		if(n<=0) return 0;
-		
-		int cnt=0;
-		
-		//n-1개의 판을 a에서 b로 이동
-		cnt += hanoi(n-1,a,c,b);
-		
-		//1개의 판을 a에서 c로 이동
-		sb.append(a+" "+c+"\n");
-		cnt += 1;
-		
-		//n-1개의 판을 다시 b에서 c로 이동
-		cnt += hanoi(n-1,b,a,c);
-		
+
+	private static int moveTower(int a, int b, int c, int n) {
+		if (n <= 0) return 0;
+
+		// 탑 이동
+		// n-1개의 판을 a에서 b로 이동
+		int cnt = moveTower(a, c, b, n - 1);
+
+		// 1개의 판을 a에서 c로 이동
+		sb.append(a + " " + c + "\n");
+		cnt++;
+
+		// n-1개의 판을 다시 b에서 c로 이동
+		cnt += moveTower(b, a, c, n - 1);
+
 		return cnt;
 	}
 }
+
+//System.out.print가 느린가 싶어서 테스트 --> BufferedWriter가 메모리를 아주 조금 덜 먹지만 시간은 비슷비슷
+//답은 sb.append(String.format())이었음. 느린가봄..ㅜㅜ

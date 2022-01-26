@@ -30,6 +30,7 @@ public class BOJ_1065_한수 {
 		
 		for(int n=num/100;n!=0;n/=10) {
 			if(prevNum-n%10 != dif) return false; 
+			prevNum = n%10;
 		}
 			
 		

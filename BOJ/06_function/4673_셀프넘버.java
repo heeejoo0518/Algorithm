@@ -1,33 +1,31 @@
-import java.util.Arrays;
-
-public class Main {
-	public static void main(String[] args) {
-		boolean[] result = new boolean[10000];
-		Arrays.fill(result,true);//true면 셀프넘버
-		
-		for(int i=0;i<result.length;i++) {
-			if(result[i]) result = d(i+1, result);
-		}	
-		
-		for(int i=0;i<result.length;i++) {
-			if(result[i]) System.out.println(i+1);
-		}
-	}
+public class BOJ_4673_셀프넘버 {
+	static final int SIZE = 10000;
+	public static boolean[] selfNumCheck = new boolean[SIZE+1];
 	
-	public static boolean[] d(int x,boolean[] result) {
-		int n=x;
+	public static void main(String[] args) {
+		StringBuilder sb = new StringBuilder();
 		
-		for(int i=10000;i>0;i/=10) {
-			if(x<i) continue;
-			n+=x/i;
-			x=x%i;
+		for(int i=1;i<SIZE;i++) {
+			if(!selfNumCheck[i]) {
+				sb.append(i).append("\n");
+			}
+			selfNumCheck[selfNumber(i)] = true;
 		}
 		
-		if(n-1>=result.length) return result;
+		System.out.println(sb.toString());
+	}
+
+	public static int selfNumber(int num) {
+		int n = num;
 		
-		result[n-1] = false;
-		result = d(n,result);
+		while(num != 0) {
+			n+=num%10;
+			num/=10;
+		}
 		
-		return result;
+		if(n>SIZE) return 0;
+		
+		return n;
+		
 	}
 }

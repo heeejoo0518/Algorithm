@@ -1,31 +1,30 @@
 import java.util.Scanner;
 
-public class Main {
+public class BOJ_2231_분해합 {
+
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
+		int N = in.nextInt();
 		
-		int n = in.nextInt();
-		
-		in.close();
-		
-		int len = (int)(Math.log10(n)+1);
-		
-		//n-자릿수*9부터 시작
-		for(int i=n-len*9;i<n;i++) {
-			int sum = i;
-			int x = i;
+		int constructor = 0;
+	
+		for(int i=1;i<N;i++) {
+			int tmpN = i;
+			int tmpS = i;
 			
-			for(int j = (int)Math.pow(10,len);j>0;j/=10) {
-				sum+=x/j;
-				x%=j;
+			while(tmpN>0) {
+				tmpS += tmpN%10;
+				tmpN /= 10;
 			}
 			
-			if(sum==n) {
-				System.out.println(i);
-				return;
+			if(tmpS==N) {
+				constructor = i;
+				break;
 			}
+			
 		}
 		
-		System.out.println(0);
+		System.out.println(constructor);
 	}
+
 }

@@ -1,67 +1,47 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
-public class Main{	
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		//값 입력받기
-		String[] tmp = br.readLine().split(" ");
-		int n = Integer.parseInt(tmp[0]);//세로 n
-		int m = Integer.parseInt(tmp[1]);//가로 m
-		
-		String[] board = new String[n];
-		
-		for(int i=0;i<n;i++) {
-			board[i] = br.readLine().trim();
-		}
-		
-		br.close();
-		
-		int minCnt=99999;
-		StringBuilder sb;
-		for(int i=0;i<=n-8;i++) {
-			for(int j=0;j<=m-8;j++) {
-				sb = new StringBuilder();
-				
-				for(int y=i;y<i+8;y++) {
-					sb.append(board[y].substring(j, j+8));
-				}
+public class BOJ_1018_체스판다시칠하기 {
+    public static void main(String[] args) throws IOException {
+        //입력
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(in.readLine());
 
-				int cnt = compareBoard(sb.toString());
-				minCnt = Math.min(minCnt, cnt);
-			}
-		}
-		
-		//출력
-		System.out.println(minCnt);
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
 
-	}
-	
-	public static int compareBoard(String currentBoard) {
-		String blackBoard = "BWBWBWBWWBWBWBWBBWBWBWBWWBWBWBWBBWBWBWBWWBWBWBWBBWBWBWBWWBWBWBWB";
-		String whiteBoard = "WBWBWBWBBWBWBWBWWBWBWBWBBWBWBWBWWBWBWBWBBWBWBWBWWBWBWBWBBWBWBWBW";
-		
-		int b_cnt = 0;
-		int w_cnt = 0;
-		for(int i=0;i<currentBoard.length();i++) {
-			if(blackBoard.charAt(i)!=currentBoard.charAt(i)) b_cnt++;
-			if(whiteBoard.charAt(i)!=currentBoard.charAt(i)) w_cnt++;
-		}
-		
-		return Math.min(b_cnt,w_cnt);
-	}
+        char[][] board = new char[N][M];
+        for (int i = 0; i < N; i++) {
+            board[i] = in.readLine().toCharArray();
+        }
+
+        //탐색
+        char[] w = "WBWBWBWB".toCharArray();
+        char[] b = "BWBWBWBW".toCharArray();
+        int min = Integer.MAX_VALUE;
+
+        for (int i = 0; i < N - 7; i++) {
+            for (int j = 0; j < M - 7; j++) {
+                //시작 인덱스(i,j)
+                int wStart = 0;
+                int bStart = 0;
+                for (int k = i; k < i + 8; k += 2) {
+                    for (int l = 0; l < 8; l++) {
+                        if (board[k][j + l] != w[l]) wStart++;
+                        if (board[k + 1][j + l] != b[l]) wStart++;
+                        if (board[k][j + l] != b[l]) bStart++;
+                        if (board[k + 1][j + l] != w[l]) bStart++;
+                    }
+                }
+                if (wStart > bStart) min = Math.min(min, bStart);
+                else min = Math.min(min, wStart);
+            }
+        }
+
+        //출력
+        System.out.println(min);
+    }
+
 }
-
-
-//반례
-//8 8
-//BBBBWBBW
-//WWWWBBWB
-//WWBBWBWW
-//WBWWBWBW
-//WBBWBBWB
-//BWBWBWWB
-//BWWWWWBW
-//BWBBBBWW

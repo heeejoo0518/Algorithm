@@ -2,63 +2,39 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Main{	
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		//값 입력받기
-		int n = Integer.parseInt(br.readLine());		
-		br.close();
-		
-//    완전탐색 방법
-//		int count = 1;
-//		int number = 666;
-//		while(count!=n) {
-//			number++;
-//			if(String.valueOf(number).contains("666"))count++;
-//		}
-//		System.out.println(number);
-		
-		
-		//패턴으로 찾는 방법
-		int cnt = 0;
-		String num="";
-		for(int start=0;start<n;start++) {
-			String str_start = start!=0?String.valueOf(start):"";
-			String str_end = "666";
-			if(str_start.matches("(.*)666")) {
-				if(n-cnt > 1000) cnt += 1000;
-				else {
-					str_end=String.format("%03d",n-cnt-1);
-					cnt = n;
-				}
-			}
-			else if(str_start.matches("(.*)66")) {
-				if(n-cnt > 100) cnt += 100;
-				else {
-					str_end="6"+String.format("%02d",n-cnt-1);
-					cnt = n;
-				}
-			}
-			else if(str_start.matches("(.*)6")) {
-				if(n-cnt > 10) cnt += 10;
-				else {
-					str_end="66"+String.valueOf(n-cnt-1);
-					cnt = n;
-				}
-			}else {
-				cnt ++;
-			}
-			
-			if(cnt==n) {
-				num = str_start+str_end;
-				break;
-			}
-		}
-		
-		//출력
-		System.out.println(num);
+public class BOJ_1436_영화감독숌 {
+    public static void main(String[] args) throws IOException {
+        //입력
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(in.readLine());
+        in.close();
 
-	}
-	
+        //탐색
+        int count = 1;
+        int number = 666;
+        while(count != N){
+            if(checkNum(++number)==3) count++;
+            //if(String.valueOf(++number).contains("666")) count++;
+        }
+
+        //출력
+        System.out.println(number);
+    }
+
+
+    //6이 연속으로 3번 들어와있는지 체크하는 함수
+    public static int checkNum(int n){
+        int cnt = 0;
+
+        while(n!=0){
+            if(cnt==3) break;
+
+            if(n%10==6) cnt++;
+            else cnt=0;
+
+            n/=10;
+        }
+
+        return cnt;
+    }
 }

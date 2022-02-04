@@ -1,37 +1,37 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Stack;
 
-public class Main{
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));		
-		int n = Integer.parseInt(br.readLine());
-		
-		int[] sequence = new int[n];
-		for(int i=0;i<n;i++) {
-			sequence[i] = Integer.parseInt(br.readLine());
-		}
-		
-		br.close();
-		
-		StringBuilder sb = new StringBuilder();		
-		Stack<Integer> stack = new Stack<>();
-		int idx=0;
-		
-		for(int i=1;i<=n;i++) {
-			stack.push(i);
-			sb.append("+\n");
-			while(!stack.empty() && stack.peek()==sequence[idx]) {
-				stack.pop();
-				sb.append("-\n");
-				idx++;
-			}
-		}
-		
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		if(stack.empty()) bw.write(sb.toString());
-		else bw.write("NO");
-		
-		bw.flush();
-		bw.close();
-	}
+public class BOJ_1874_스택수열 {
+    public static void main(String[] args) throws IOException {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(in.readLine());
+
+        Stack<Integer> stack = new Stack<>();
+        StringBuilder sb = new StringBuilder();
+
+        int count = 1;
+
+        for (int i = 0; i < n; i++) {
+            int num = Integer.parseInt(in.readLine());
+            while (true) {
+                if (num >= count) {
+                    stack.push(count++);
+                    sb.append("+\n");
+                }
+
+                if (stack.empty() || num < stack.peek()) {
+                    System.out.println("NO");
+                    return;
+                } else if (num == stack.peek()) {
+                    stack.pop();
+                    sb.append("-\n");
+                    break;
+                }
+            }
+        }
+        System.out.print(sb);
+
+    }
 }

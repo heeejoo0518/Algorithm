@@ -2,6 +2,7 @@
 
 ## Arrays.sort()
 
+* DualPivotQuicksort 사용 - 평균 O(n log(n)), 최악 O(n^2)
 * primitive type에는 quick sort 사용, 객체에는 merge sort 사용
   * merge sort는 안정적이지만 quick sort는 안정적이지 않다.(순서가 달라짐) primitive type은 정렬이 안정적인지 여부가 상관 없다. 동일하지 않지만 동일한 정렬순서를 갖는 값이 없기 때문이다.
   * quick sort가 merge sort보다 배열 생성시간만큼 빠름
@@ -17,7 +18,10 @@ Arrays.sort(data, startIdx, toIdx, comparator);
 
 ## Collections.sort()
 
-* merge sort 사용
+* <s>merge sort 사용</s>
+* Timsort() 사용 - 삽입정렬 + 합병정렬
+  * 시간복잡도 평균 O(n log(n)) 최악도 동일
+  * 참조지역성원리(CPU가 미래에 원하는 데이터를 예측하여 캐시에 담아놓는데 이때 예측률을 높이기 위해 사용하는 원리)
 
 ```java
 Collections.sort(data);

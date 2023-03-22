@@ -3,7 +3,6 @@ import java.util.*;
 
 public class BOJ_20920_영단어암기는괴로워 {
 	public static void main(String[] args) throws IOException {
-		//자주 나올수록, 단어 길이 길수록, 알파벳 사전순으로 앞에 배치
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(in.readLine());
 		int N = Integer.parseInt(st.nextToken());
@@ -22,6 +21,7 @@ public class BOJ_20920_영단어암기는괴로워 {
 			map.put(word,map.getOrDefault(word,0)+1);
 		}
 
+		//자주 나올수록, 단어 길이 길수록, 알파벳 사전순으로 앞에 배치
 		Collections.sort(list, (o1, o2) -> {
 			if (map.getOrDefault(o1, 0) != map.getOrDefault(o2, 0)) {
 				return map.getOrDefault(o2, 0) - map.getOrDefault(o1, 0);

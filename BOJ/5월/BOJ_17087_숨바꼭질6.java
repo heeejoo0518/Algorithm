@@ -14,7 +14,6 @@ public class BOJ_17087_숨바꼭질6 {
 			A[i] = Integer.parseInt(st.nextToken());
 		}
 
-		Arrays.sort(A);
 		int answer = Math.abs(A[0]-A[1]);
 		for(int i=2;i<=N;i++) answer = gcd(answer, Math.abs(A[i]-A[i-1]));
 

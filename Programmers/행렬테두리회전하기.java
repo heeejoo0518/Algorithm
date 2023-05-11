@@ -5,8 +5,8 @@ class Solution {
     int[][] deltas = {{0,1},{1,0},{0,-1},{-1,0}};
     public int[] solution(int rows, int columns, int[][] queries) {
         board = new int[rows+1][columns+1];        
-        for(int i=1, num = 1;i<=r;i++){
-            for(int j=1;j<=c;j++){
+        for(int i=1, num = 1;i<=rows;i++){
+            for(int j=1;j<=columns;j++){
                 board[i][j] = num++;
             }
         }

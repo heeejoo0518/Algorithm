@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Solution {
+class Solution { 
     public int[] solution(String[] enroll, String[] referral, String[] seller, int[] amount) {
         Map<String, Member> map = new HashMap<>();
         map.put("-", new Member(-1,null));

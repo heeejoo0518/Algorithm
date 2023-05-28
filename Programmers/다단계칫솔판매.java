@@ -15,18 +15,15 @@ class Solution {
             next = now.next;
             money = amount[i]*100;
 
-            while(true){
-                if(money/10==0 || next == null){
-                    now.money += money;
-                    break;
-                }
-                
+            while(money/10 != 0 && next != null){
                 now.money += money-money/10;
                 money /= 10;
                 
                 now = next;
                 next = now.next;
             }
+            
+            now.money += money;
         }
         
         int[] answer = new int[enroll.length];

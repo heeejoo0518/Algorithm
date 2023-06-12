@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class Main {
+public class BOJ_2292_벌집 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(in.readLine());

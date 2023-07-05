@@ -12,18 +12,14 @@ public class BOJ_2437_저울 {
 		}
 		Arrays.sort(weights);
 
-		int sum = 0;
-		int answer = 0;
-
-		for(int idx=0;idx<N-1;idx++){
-			sum += weights[idx];
-			if(sum < weights[idx+1]){
-				answer = sum+1;
+		int sum = 1;
+		for(int idx=0;idx<N;idx++){
+			if(sum < weights[idx]){
 				break;
 			}
+			sum += weights[idx];
 		}
 
-		if(answer==0) System.out.println(sum+1);
-		else System.out.println(answer);
+		System.out.println(sum);
 	}
 }

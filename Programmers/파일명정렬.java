@@ -1,6 +1,6 @@
 import java.util.*;
 
-class 파일명정 {
+class 파일명정렬 {
     public String[] solution(String[] files) {
         //쪼개서 저장
         File[] filelist = new File[files.length];

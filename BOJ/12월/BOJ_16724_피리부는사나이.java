@@ -31,25 +31,20 @@ public class BOJ_16724_피리부는사나이 {
 		count[i][j] = num;
 
 		int next = num;
-		int ni,nj;
+		int d=3;
 		switch(map[i][j]){
 			case 'U':
-				ni = i+deltas[0][0];
-				nj = j+deltas[0][1];
+                		d=0;
 				break;
 			case 'D':
-				ni = i+deltas[1][0];
-				nj = j+deltas[1][1];
+				d=1;
 				break;
 			case 'L':
-				ni = i+deltas[2][0];
-				nj = j+deltas[2][1];
-				break;
-			default:
-				ni = i+deltas[3][0];
-				nj = j+deltas[3][1];
+				d=2;
 				break;
 		}
+        	int ni = i+deltas[d][0];
+		int nj = j+deltas[d][1];
 
 		if(ni >= 0 && nj >= 0 && ni < N && nj < M) next = dfs(num,ni,nj);
 		if(next != 0 && next != num) count[i][j] = next;
